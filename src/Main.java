@@ -28,21 +28,15 @@ public class Main {
                 map(person -> person.getFamily()).
                 collect(Collectors.toList());
         System.out.println("Количество призывников: " + recruit.size());
-        Comparator<String> personComparator
-                = Comparator.comparing(t -> Person.getFamily(t));
         List<String> labourPeople = (List<String>) stream3.
                 filter(person -> person.getEducation() == Education.HIGHER).
                 filter(person -> (person.getSex() == Sex.MAN) && (person.getAge() >= 18) && (person.getAge() <= 65) || (person.getSex() == Sex.WOMAN) && (person.getAge() >= 18) && (person.getAge() <= 60)).
                 map(person -> person.getFamily()).
-                sorted(personComparator).collect(Collectors.toList());
-                // sorted(Comparator.comparing(String::getFamily(), (s1, s2) -> s2.compareTo(s1))).
-                // sorted(Comparator.comparing((s1, s2) -> s2.compareTo(s1))).
-                // sorted(Comparator.comparing(person.getFamily(),(s1, s2) -> s2.compareTo(s1))).
-                // sorted(Comparator.comparing((s1, s2) -> s2.getFamily().compareTo(s1.getFamily()))).
-                //sorted(Comparator.comparing(Person::getFamily).
-                //collect(Collectors.toList());
+                sorted(Comparator.comparing(String::toLowerCase)).collect(Collectors.toList());
         System.out.println("Количество потенциально работоспособных людей с высшим образованием: " + labourPeople.size());
-        for (int i = 0; i < 20; i++) System.out.println(labourPeople.get(i));
+        for (int i = 0; i < 5; i++) System.out.println(labourPeople.get(i));
+        for (int i = labourPeople.size()/2-5; i < labourPeople.size()/2; i++) System.out.println(labourPeople.get(i));
+        for (int i = labourPeople.size()-5; i < labourPeople.size(); i++) System.out.println(labourPeople.get(i));
 
     }
 }
